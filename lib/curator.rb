@@ -1,3 +1,5 @@
+require 'csv'
+
 class Curator
   attr_reader :photographs, :artists
 
@@ -49,6 +51,25 @@ class Curator
     @photographs.select do |photo|
       @artist = find_artist_by_id(photo.artist_id)
       @artist.country == country
+    end
+  end
+
+  def csv(photographs)
+    contents = CSV.open "photographs.csv", headers: true, header_converters: :symbol
+    contents.each do |row|
+      id = row[:id].to_i
+      name = row[:name]
+      artist_id = row[:artist_id]
+      year = row[:year]
+      photograph = Photograph.new(id: id, name: name, artist_id: artist_id, year: year)
+      @photographs << photograph
+      puts "#{photographs.display}"
+    end
+  end
+
+  def display_photos
+    @photographs.each do |photo|
+      puts photographs.display
     end
   end
 end

@@ -101,4 +101,10 @@ RSpec.describe Curator do
     expect(@curator.from_country("France")).to be_a Array
     expect(@curator.from_country("France")).to eq(expected_result)
   end
+
+  it "adds photos from CSV paath" do
+    expect(@curator.csv("photographs.csv"))
+
+    expect(@curator.display_photos).to all(be_a(Photograph))
+  end
 end

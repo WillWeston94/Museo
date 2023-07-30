@@ -7,4 +7,8 @@ class Photograph
     @artist_id = attributes[:artist_id]
     @year = attributes[:year]
   end
+
+  def display
+    display = "#{id}: #{name} #{artist_id} #{year}"
+  end
 end
